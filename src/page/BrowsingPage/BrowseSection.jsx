@@ -33,12 +33,9 @@ function BrowseSection({ selectedGenre, setBrowseMovie, browseMovie }) {
       navigate(`/browse?query=${valueSearch}`);
     }
   }, [valueSearch, navigate]);
-
-  console.log(valueSearch);
   return (
     <>
       <div className="browse-container">
-        <h1>{}</h1>
         <div className="browse-content">
           {browseMovie.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />

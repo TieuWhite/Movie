@@ -58,11 +58,13 @@ const StyleNav = {
   color: "white",
 };
 
-export default function NavBar() {
-  const [searchParams, setSearchParams] = useSearchParams("");
-  const [input, setInput] = useState("");
+export default function NavBar({
+  searchParams,
+  setSearchParams,
+  input,
+  setInput,
+}) {
   const navigate = useNavigate();
-
   const onSubmit = (e) => {
     e.preventDefault();
     setSearchParams({ query: input });

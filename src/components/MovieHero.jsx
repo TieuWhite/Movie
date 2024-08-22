@@ -1,7 +1,25 @@
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 function MovieHero({ trendingMovies }) {
+  const [searchParams, setSearchParams] = useSearchParams("");
+  const [input, setInput] = useState("");
+  const [randomBackdrop, setRandomBackdrop] = useState(null);
+
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
-  const randomBackdrop =
-    trendingMovies[Math.floor(Math.random() * trendingMovies?.length)];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setRandomBackdrop(
+      trendingMovies[Math.floor(Math.random() * trendingMovies?.length)]
+    );
+  }, [trendingMovies]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSearchParams({ query: input });
+    navigate(`/browse?query=${input}`);
+  };
 
   return (
     <>
@@ -9,7 +27,6 @@ function MovieHero({ trendingMovies }) {
         className="hero-container"
         style={{
           backgroundImage: `url(${IMAGE_PATH}${randomBackdrop?.backdrop_path})`,
-
           backgroundSize: `cover`,
         }}
       >
@@ -20,7 +37,15 @@ function MovieHero({ trendingMovies }) {
           </h1>
         </div>
         <div className="hero-search">
-          <input className="hero-input" type="text" placeholder="Search..." />
+          <form onSubmit={onSubmit}>
+            <input
+              onChange={(e) => setInput(e.target.value)}
+              className="hero-input"
+              type="text"
+              placeholder="Search..."
+            />
+            {input}
+          </form>
         </div>
       </div>
     </>
