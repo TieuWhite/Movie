@@ -4,6 +4,9 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Typography } from "@mui/material";
+import { useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -47,37 +50,76 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const StyleNav = {
+  fontWeight: "bold",
+  fontSize: "1,5em",
+  fontFamily: "Arial, Helvetica, sans-serif",
+  margin: "1.25em",
+  color: "white",
+};
+
 export default function NavBar() {
+  const [searchParams, setSearchParams] = useSearchParams("");
+  const [input, setInput] = useState("");
+  const navigate = useNavigate();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSearchParams({ query: input });
+    navigate(`/browse?query=${input}`);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        sx={{
-          position: "static",
-          alignSelf: "center",
-          backgroundColor: "rgba(3, 37, 65, 1)",
-        }}
-      >
-        <Toolbar
+    <form onSubmit={onSubmit}>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "80%",
+            position: "static",
             alignSelf: "center",
             backgroundColor: "rgba(3, 37, 65, 1)",
           }}
         >
-          <img src="icon.svg" height={"30px"}></img>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBar>
-    </Box>
+          <Toolbar
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "80%",
+              alignSelf: "center",
+              backgroundColor: "rgba(3, 37, 65, 1)",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-around",
+              }}
+            >
+              <Link to={"/"}>
+                <img src="icon.svg" height={"30px"}></img>
+              </Link>
+              <Link to={"/"}>
+                <Typography sx={StyleNav}>Home</Typography>
+              </Link>
+              <Link to={"/browse"}>
+                <Typography sx={StyleNav}>Browse</Typography>
+              </Link>
+            </Box>
+
+            <Search onSubmit={onSubmit}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                onChange={(e) => setInput(e.target.value)}
+                value={input}
+              />
+            </Search>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </form>
   );
 }

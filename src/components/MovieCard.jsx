@@ -1,17 +1,21 @@
-function MovieCard({ movie }) {
-  const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+import { Link, useParams } from "react-router-dom";
+import { IMAGE_PATH } from "../app/config";
 
+function MovieCard({ movie }) {
   return (
     <>
       <div className="movie-card">
         {movie.poster_path ? (
-          <img
-            className="movie-cover"
-            src={`${IMAGE_PATH}${movie.poster_path}`}
-            alt="movie-poster"
-          />
+          <Link to={`/${movie.id}`}>
+            <img
+              className="movie-cover"
+              src={`${IMAGE_PATH}${movie.poster_path}`}
+              alt="movie-poster"
+            />
+          </Link>
         ) : null}
-        <div>{movie.title}</div>
+        <div className="movie-title">{movie.title}</div>
+        <div className="movie-date">{movie.release_date}</div>
       </div>
     </>
   );
