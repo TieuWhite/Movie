@@ -8,6 +8,10 @@
   margin: 0px 5%;
 }
 
+.pagination {
+  width: 100%;
+}
+
 .movie-container {
   padding: 0px 20%;
   gap: 15px;
@@ -126,4 +130,64 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+}
+
+a:-webkit-any-link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 480px) {
+  .nav-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .MuiAppBar-root {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .MuiToolbar-root {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .MuiTypography-root {
+    font-size: 1em;
+    margin: 10px;
+  }
+
+  .Search {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .SearchIconWrapper {
+    padding: 10px;
+  }
+
+  .StyledInputBase-root {
+    width: 100%;
+    padding: 10px;
+  }
+  .hero-header {
+    font-size: 10px;
+  }
+
+  .hero-container {
+    width: 100%;
+    background-position: center;
+  }
+  .side-navbar {
+    font-size: 10px;
+  }
+  .home-page {
+    margin: 0px;
+  }
+  .browse-content {
+    grid-template-columns: 1fr 1fr;
+  }
 }

@@ -4,9 +4,9 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { useState } from "react";
+import icon from "../../icon.svg";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -98,7 +98,7 @@ export default function NavBar({
               }}
             >
               <Link to={"/"}>
-                <img src="icon.svg" height={"30px"}></img>
+                <img className="nav-image" src={icon} height={"30px"}></img>
               </Link>
               <Link to={"/"}>
                 <Typography sx={StyleNav}>Home</Typography>

@@ -15,6 +15,16 @@ function TrendingSlider({ trendingMovies, setTrendingMovies }) {
     slidesToShow: 5,
     speed: 500,
     arrow: true,
+    responsive: [
+      {
+        breakpoint: 481,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+    ],
   };
 
   const fetchTrendingMovies = async (page = 1) => {
